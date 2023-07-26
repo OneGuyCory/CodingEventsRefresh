@@ -7,9 +7,15 @@
 <h1>Add Event</h1>
 
 <form method="post">
-   <label for="name">Event Name</label> 
-   <input name="name" type="text" />
-   <label for="desc">Event Description</label>
-   <input name="desc" type="text" />
+   <div class="form-group">
+       <label>
+           Name
+           <input type="text" name="name" />
+       </label>
+       <label>
+           Description
+           <input type="text" name="description" />
+       </label>
+   </div>
    <input type="submit" value="Add Event" />
 </form>
