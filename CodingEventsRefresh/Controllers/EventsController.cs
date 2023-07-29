@@ -28,7 +28,6 @@ namespace CodingEventsRefresh.Controllers
         public IActionResult NewEvent(Event newEvent)
         {
             EventData.Add(newEvent);
-
             return Redirect("/Events");
         }
 
