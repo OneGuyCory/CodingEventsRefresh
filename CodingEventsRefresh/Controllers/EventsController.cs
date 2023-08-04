@@ -3,6 +3,8 @@ using CodingEventsRefresh.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using EventData = CodingEventsRefresh.Data.EventData;
+using System.Globalization;
+using CodingEventsRefresh.ViewModels;
 
 namespace CodingEventsRefresh.Controllers
 {
@@ -12,22 +14,30 @@ namespace CodingEventsRefresh.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.events = EventData.GetAll();
+            List<Event> events = new List<Event>(EventData.GetAll());
             
-            return View();
+            return View(events);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            AddEventViewModel addEventViewModel = new AddEventViewModel();
+
+            return View(addEventViewModel);
         }
 
         [HttpPost]
-        [Route("/Events/Add")]
-        public IActionResult NewEvent(Event newEvent)
+        public IActionResult Add(AddEventViewModel addEventViewModel)
         {
+            Event newEvent = new Event
+            {
+                Name = addEventViewModel.Name,
+                Description = addEventViewModel.Description,
+            };
+
             EventData.Add(newEvent);
+
             return Redirect("/Events");
         }
 
@@ -50,5 +60,26 @@ namespace CodingEventsRefresh.Controllers
 
             return Redirect("/Events");
         }
+
+        [HttpPost]
+        [Route("/Events/Edit/{eventId}")]
+        public IActionResult Edit(int eventId)
+        {
+            Event editingEvent = EventData.GetById(eventId);
+            ViewBag.eventToEdit = editingEvent;
+            ViewBag.title = $"Edit Event {editingEvent.Name} (id = {editingEvent.Id}";
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/Events/Edit")]
+        public IActionResult SubmitEditEventForm(int eventId, string name, string description)
+        {
+            Event editingEvent = EventData.GetById(eventId);
+            editingEvent.Name = name;
+            editingEvent.Description = description;
+            return Redirect("/Events");
+        }
+
     }
 }
