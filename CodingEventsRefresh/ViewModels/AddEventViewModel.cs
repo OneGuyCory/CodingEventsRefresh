@@ -16,6 +16,12 @@ namespace CodingEventsRefresh.ViewModels
         [EmailAddress]
         public string? ContactEmail { get; set; }
 
+        [Required(ErrorMessage = "Location information is required.")]
+        public string Location { get; set; }
+
+        [Range(0, 100000, ErrorMessage = "Attendance must be under 100,000")]
+        public int Attendance { get; set; }
+
          
 
     }
