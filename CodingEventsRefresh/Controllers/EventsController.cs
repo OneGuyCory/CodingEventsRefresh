@@ -43,8 +43,7 @@ namespace CodingEventsRefresh.Controllers
                     Name = addEventViewModel.Name,
                     Description = addEventViewModel.Description,
                     ContactEmail = addEventViewModel.ContactEmail,
-                    Location = addEventViewModel.Location,
-                    Attendance = addEventViewModel.Attendance,
+                    Type = addEventViewModel.Type
                 };
                 context.Events.Add(newEvent);
                 context.SaveChanges();

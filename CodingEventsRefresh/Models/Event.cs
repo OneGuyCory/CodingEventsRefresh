@@ -1,13 +1,14 @@
-﻿namespace CodingEventsRefresh.Models
+﻿using System.Diagnostics;
+
+namespace CodingEventsRefresh.Models
 {
     public class Event
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
         public string? ContactEmail { get; set; }
-        public string? Location { get; set; }
-        public int? Attendance { get; set; }
-
+      
+        public EventType Type { get; set; }
         public int Id { get; set; }
 
         public Event()

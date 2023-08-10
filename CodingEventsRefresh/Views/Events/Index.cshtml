@@ -12,7 +12,8 @@
 {
     <p>No events yet!</p>
 }
-
+else
+{
 <table class="table">
         <tr>
             <th>
@@ -28,10 +29,7 @@
                 Contact Email
             </th>
             <th>
-                Location
-            </th>
-            <th>
-                Attendance
+                Event Type
             </th>
         </tr>
     @foreach (var evt in Model)
@@ -41,9 +39,8 @@
             <td>@evt.Name</td>
             <td>@evt.Description</td>
             <td>@evt.ContactEmail</td>
-            <td>@evt.Location</td>
-            <td>@evt.Attendance</td>
-            <td><a asp-controller="Events" asp-action="Edit" asp-route-id="@evt.Id">Edit Event</a> </td>
+            <td>@evt.Type</td>
         </tr>
     }
 </table>
+}
