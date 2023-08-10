@@ -1,3 +1,6 @@
+using CodingEventsRefresh.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace CodingEventsRefresh
 {
     public class Program
@@ -8,6 +11,11 @@ namespace CodingEventsRefresh
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            var connectionString = "server=localhost;user=codingevents;password=codingevents;database=coding-events";
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 34));
+
+            builder.Services.AddDbContext<EventDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
 
             var app = builder.Build();
 
@@ -31,6 +39,9 @@ namespace CodingEventsRefresh
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+            
+
         }
     }
 }
